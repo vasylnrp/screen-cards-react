@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { User } from '../model/Model';
 import { AuthService } from '../services/AuthService';
+import history from '../utils/history';
 import './App.css';
 import { Navbar } from './Navbar';
 
@@ -39,7 +41,7 @@ export class App extends React.Component<AppProps, AppState> {
 
     return (
       <div className='wrapper'>
-        <BrowserRouter>
+        <HistoryRouter history={history}>
           <Navbar user={this.state.user} />
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
@@ -48,7 +50,7 @@ export class App extends React.Component<AppProps, AppState> {
               <Route path='/profile' element={<Profile/>}/>
             </Routes>
           </Suspense>
-        </BrowserRouter>
+        </HistoryRouter>
       </div>
     )
   }

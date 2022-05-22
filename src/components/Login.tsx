@@ -61,6 +61,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         loginMessage = <label>Login failed</label>
       }
     }
+
     return (
       <>
         <h2>Please login</h2>
