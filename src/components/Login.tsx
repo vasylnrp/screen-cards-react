@@ -1,6 +1,7 @@
 import React, { SyntheticEvent } from "react";
 import { User } from "../model/Model";
 import { AuthService } from "../services/AuthService";
+import history from "../utils/history";
 
 interface LoginProps {
   authService: AuthService;
@@ -18,7 +19,7 @@ interface CustomEvent {
   target: HTMLInputElement,
 }
 
-export class Login extends React.Component<LoginProps, LoginState> {
+export default class Login extends React.Component<LoginProps, LoginState> {
 
   state: Readonly<LoginState> = {
     userName: '',
@@ -45,6 +46,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
     if (result) {
       this.setState({loginSuccessfull: true});
       this.props.setUser(result);
+      history.push('/profile');
     } else {
       this.setState({loginSuccessfull: false});
     }
@@ -60,7 +62,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
       }
     }
     return (
-      <div>
+      <>
         <h2>Please login</h2>
         {loginMessage}
         <form onSubmit={e => this.handleSubmit(e)}>
@@ -68,7 +70,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
           <input value={this.state.password} type='password' onChange={e => this.setPassword(e)} /><br/>
           <input type='submit'/>
         </form>
-      </div>
+      </>
     )
   }
 }
