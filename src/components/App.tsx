@@ -47,7 +47,8 @@ export class App extends React.Component<AppProps, AppState> {
             <Routes>
               <Route index element={<Home/>}/>
               <Route path='/login' element={<Login authService={this.authService} setUser={this.setUser}/>}/>
-              <Route path='/profile' element={<Profile/>}/>
+              <Route path='/profile'
+                element={<Profile user={this.state.user} authService={this.authService} />}/>
             </Routes>
           </Suspense>
         </HistoryRouter>

@@ -7,3 +7,9 @@ export interface UserAttribute {
   Name: string,
   Value: string,
 }
+
+export interface Card {
+  cardId: string,
+  name: string,
+  photoUrl?: string,
+}
