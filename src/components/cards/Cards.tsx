@@ -1,7 +1,7 @@
 import { Component } from "react";
-import genericImage from '../../assets/default.png';
 import { Card } from "../../model/Model";
 import { DataService } from "../../services/DataService";
+import { CardComponent } from "./CardComponent";
 
 interface CardsState {
   cards: Card[],
@@ -13,19 +13,39 @@ interface CardsProps {
 
 export class Cards extends Component<CardsProps, CardsState> {
 
-  private renderImage() {
-    if (this.props.photoUrl) {
-      return <img src={this.props.photoUrl} alt='' />
-    } else {
-      return <img src={genericImage} alt='' />
+  constructor(props: CardsProps) {
+    super(props);
+    this.state = {
+      cards: []
     }
+    this.doAction = this.doAction.bind(this);
+  }
+
+  async componentDidMount() {
+    const cards = await this.props.dataService.getCards();
+    this.setState({cards});
+  }
+
+  private async doAction(cardId: string) {}
+
+  private renderCards() {
+    const rows: any[] = [];
+    for (const card of this.state.cards) {
+      rows.push(
+        <CardComponent
+          cardId={card.cardId}
+          name={card.name}
+          doAction={this.doAction}
+        />
+      );
+    }
+    return rows;
   }
 
   render() {
     return <>
-      <label>{this.props.cardId}</label><br/>
-      <label>{this.props.name}</label><br/>
-      <button onClick={() => this.props.doAction(this.props.cardId)}>Reserve</button>
+      <h2>Wlcome to the cards space!</h2>
+      {this.renderCards()}
     </>
   }
 }

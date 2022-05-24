@@ -12,6 +12,7 @@ export class Navbar extends Component<{user: User | undefined}> {
       <div className='navbar'>
         <Link to='/'> Home</Link>
         <Link to='/profile'> Profile</Link>
+        <Link to='/cards'> Cards</Link>
         {loginLogOut}
       </div>
     )

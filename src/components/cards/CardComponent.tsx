@@ -1,5 +1,6 @@
 import { Component } from "react";
 import genericImage from '../../assets/default.png';
+import './CardComponent.css';
 
 interface CardComponentProps {
   cardId: string,
@@ -19,10 +20,11 @@ export class CardComponent extends Component<CardComponentProps> {
   }
 
   render() {
-    return <>
-      <label>{this.props.cardId}</label><br/>
-      <label>{this.props.name}</label><br/>
+    return <div className="cardComponent">
+      {this.renderImage()}
+      <label className="cardId">{this.props.cardId}</label><br/>
+      <label className="name">{this.props.name}</label><br/>
       <button onClick={() => this.props.doAction(this.props.cardId)}>Reserve</button>
-    </>
+    </div>
   }
 }

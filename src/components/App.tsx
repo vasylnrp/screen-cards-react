@@ -3,8 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { User } from '../model/Model';
 import { AuthService } from '../services/AuthService';
+import { DataService } from '../services/DataService';
 import history from '../utils/history';
 import './App.css';
+import { Cards } from './cards/Cards';
 import { Navbar } from './Navbar';
 
 interface AppState {
@@ -16,6 +18,7 @@ interface AppProps {}
 export class App extends React.Component<AppProps, AppState> {
 
   private authService: AuthService = new AuthService();
+  private dataService: DataService = new DataService();
 
   constructor(props: AppProps) {
     super(props);
@@ -49,6 +52,8 @@ export class App extends React.Component<AppProps, AppState> {
               <Route path='/login' element={<Login authService={this.authService} setUser={this.setUser}/>}/>
               <Route path='/profile'
                 element={<Profile user={this.state.user} authService={this.authService} />}/>
+              <Route path='/cards'
+                element={<Cards dataService={this.dataService} />}/>
             </Routes>
           </Suspense>
         </HistoryRouter>
