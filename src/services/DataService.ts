@@ -17,4 +17,12 @@ export class DataService {
     });
     return result;
   }
+
+  public async changeCard(cardId: string): Promise<string | undefined> {
+    if (cardId === '123') {
+      return ('5555');
+    } else {
+      return undefined;
+    }
+  }
 }
