@@ -7,6 +7,7 @@ import { DataService } from '../services/DataService';
 import history from '../utils/history';
 import './App.css';
 import { Cards } from './cards/Cards';
+import { CreateCard } from './cards/CreateCard';
 import { Navbar } from './Navbar';
 
 interface AppState {
@@ -30,11 +31,11 @@ export class App extends React.Component<AppProps, AppState> {
     this.setUser = this.setUser.bind(this);
   }
 
-  private setUser(user: User) {
+  private async setUser(user: User) {
     this.setState({
       user: user,
     });
-    console.log('setting the user:!', {user});
+    await this.authService.getAWSTemporaryCreds(user.cognitoUser);
   }
 
   render() {
@@ -54,6 +55,8 @@ export class App extends React.Component<AppProps, AppState> {
                 element={<Profile user={this.state.user} authService={this.authService} />}/>
               <Route path='/cards'
                 element={<Cards dataService={this.dataService} />}/>
+              <Route path='/createCard'
+                element={<CreateCard dataService={this.dataService} />}/>
             </Routes>
           </Suspense>
         </HistoryRouter>

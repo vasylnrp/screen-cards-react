@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import { Card } from "../../model/Model";
 import { DataService } from "../../services/DataService";
 import { CardComponent } from "./CardComponent";
@@ -71,6 +72,7 @@ export class Cards extends Component<CardsProps, CardsState> {
   render() {
     return <>
       <h2>Wlcome to the cards space!</h2>
+      <Link to='/createCard'>Create card</Link><br/>
       {this.renderCards()}
       <ConfirmModalComponent
         close={this.closeModal}
